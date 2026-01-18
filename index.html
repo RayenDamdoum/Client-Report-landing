@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>ClientReport – Automated Google Analytics Client Reports</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      margin: 0;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      color: #1a1a1a;
+      line-height: 1.6;
+    }
+
+    .background-pattern {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0.1;
+      background-image: 
+        radial-gradient(circle at 20% 50%, white 1px, transparent 1px),
+        radial-gradient(circle at 80% 80%, white 1px, transparent 1px),
+        radial-gradient(circle at 40% 20%, white 1px, transparent 1px);
+      background-size: 50px 50px, 80px 80px, 60px 60px;
+      pointer-events: none;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 80px 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero {
+      text-align: center;
+      margin-bottom: 80px;
+    }
+
+    .logo {
+      display: inline-block;
+      font-size: 48px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 20px;
+      letter-spacing: -1px;
+      text-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .tagline {
+      font-size: 22px;
+      color: rgba(255, 255, 255, 0.95);
+      margin-bottom: 40px;
+      font-weight: 400;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .cta {
+      margin-top: 40px;
+    }
+
+    .cta a {
+      display: inline-block;
+      padding: 16px 40px;
+      background: #ffffff;
+      color: #667eea;
+      text-decoration: none;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 16px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta a::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transition: left 0.5s;
+    }
+
+    .cta a:hover::before {
+      left: 100%;
+    }
+
+    .cta a:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .cta a:active {
+      transform: translateY(0);
+    }
+
+    .content-card {
+      background: #ffffff;
+      border-radius: 24px;
+      padding: 50px 40px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+      margin-top: 40px;
+    }
+
+    .features h2 {
+      font-size: 32px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    .features-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin-top: 30px;
+    }
+
+    .features-list li {
+      padding: 20px;
+      background: #f8f9fa;
+      border-radius: 12px;
+      font-size: 16px;
+      color: #333;
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+    }
+
+    .features-list li:hover {
+      background: #f0f4ff;
+      border-color: #667eea;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+    }
+
+    .features-list li::before {
+      content: '✓';
+      display: inline-block;
+      width: 24px;
+      height: 24px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 24px;
+      font-weight: bold;
+      margin-right: 12px;
+      font-size: 14px;
+    }
+
+    .footer {
+      margin-top: 60px;
+      text-align: center;
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 40px 20px;
+      }
+
+      .logo {
+        font-size: 36px;
+      }
+
+      .tagline {
+        font-size: 18px;
+      }
+
+      .content-card {
+        padding: 30px 20px;
+      }
+
+      .features h2 {
+        font-size: 26px;
+      }
+
+      .features-list {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="background-pattern"></div>
+  <div class="container">
+    <div class="hero">
+      <h1 class="logo">ClientMetrics</h1>
+      <p class="tagline">Automated Google Analytics client reporting for freelancers and agencies.</p>
+
+      <div class="cta">
+        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=rdamdoum@gmail.com&su=Request%20Demo" target="_blank">Request Demo</a>
+      </div>
+    </div>
+
+    <div class="content-card">
+      <div class="features">
+        <h2>What it does</h2>
+        <ul class="features-list">
+          <li>Connects to Google Analytics 4</li>
+          <li>Generates client-ready PDF reports</li>
+          <li>One-click report regeneration</li>
+          <li>Simple client branding</li>
+          <li>Built for freelancers and small agencies</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer">
+      © ClientReport – Pre-launch
+    </div>
+  </div>
+</body>
+</html>
